@@ -1,6 +1,14 @@
 import React, {Component} from "react";
 import axios from "axios";
 import Collections from "./collections";
+import FeatureItems from "./FeatureItems";
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Link
+  } from "react-router-dom";
+
 
 class ApiLoader extends Component {
 
@@ -66,8 +74,13 @@ class ApiLoader extends Component {
         }
     }
 
+    CollectionRoute = (e) => (
+        <h3>Going here nowhere</h3>
+    );
+
     render() {
         const{url,conforms} = this.state
+
         return(
             <div className="row">
                 <label>API url </label>
@@ -76,7 +89,10 @@ class ApiLoader extends Component {
                     conforms > 0 && 
                     <div>
                         <br/>
-                        <Collections url={url} />
+                        <Routes>
+                            <Route exact path="/" element={<Collections url={url} />} />
+                            <Route exact path="collection/:collectionId" element={<FeatureItems url={url} />} />
+                        </Routes>
                     </div>
                 }
                 {

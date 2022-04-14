@@ -1,8 +1,22 @@
 import React, {Component} from "react";
 import axios from "axios";
-import Modal from "react-bootstrap/Modal";
 import Table from "react-bootstrap/Table";
-import Button from "react-bootstrap/Button";
+import {
+    useParams
+  } from "react-router-dom";
+
+const withRouter = WrappedComponent => props => {
+    const params = useParams();
+    // etc... other react-router-dom v6 hooks
+  
+    return (
+      <WrappedComponent
+        {...props}
+        params={params}
+        // etc...
+      />
+    );
+};
 
 class FeatureItems extends Component {
 
@@ -11,65 +25,42 @@ class FeatureItems extends Component {
 
         this.state = {
             url: props.url,
-            id: props.id,
-            items: [],
-            expanded: false
+            collectionId: this.props.params.collectionId,
+            items: []
         }
     }
 
-    expand = (e) => {
+    componentDidMount() {
 
-        if(!this.state.expanded) {
-            axios.get(this.state.url + '/collections/' + this.state.id + '/items?f=json')
-            .then(response => { 
+        axios.get(this.state.url + '/collections/' + this.state.collectionId + '/items?f=json')
+        .then(response => { 
 
-                this.setState({
-                    items: response.data.features,
-                    expanded: !this.state.expanded
-                })
-            })
-        } else {
             this.setState({
-                items: [],
-                expanded: !this.state.expanded
+                items: response.data.features
             })
-        }
+        })
     }
-
-
 
     render() {
 
-        const{expanded, items, id} = this.state;
+        const{items, collectionId} = this.state;
 
         return(
             <span className="ps-2">
-                <Button variant="success" onClick={this.expand}>View</Button>
-                
-                <Modal show={expanded} onHide={this.expand}>
-                    <Modal.Header closeButton>
-                    <Modal.Title>Collection content</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Table striped bordered hover>
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>GeoJSON</th>
-                                    </tr>
-                            </thead>
-                            <tbody>
-                                {items.filter(item => item.type === 'Feature').map(feature => 
-                                    <Feature key={feature.id} collectionId={id} featureId={feature.id} url={this.state.url} />)}
-                            </tbody>
-                        </Table>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={this.expand}>
-                            Close
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
+                <h2>{collectionId}</h2>
+
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>GeoJSON</th>
+                            </tr>
+                    </thead>
+                    <tbody>
+                        {items.filter(item => item.type === 'Feature').map(feature => 
+                            <Feature key={feature.id} collectionId={collectionId} featureId={feature.id} url={this.state.url} />)}
+                    </tbody>
+                </Table>
 
             </span>
         )
@@ -132,4 +123,4 @@ class Feature extends Component {
 
 }
 
-export default FeatureItems
+export default withRouter(FeatureItems)

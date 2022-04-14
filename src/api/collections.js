@@ -1,8 +1,12 @@
 import React, {Component} from "react";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
-import FeatureItems from "./FeatureItems";
 import RecordItems from "./RecordItems";
+import {
+    BrowserRouter as Router,
+    generatePath,
+    Link
+  } from "react-router-dom";
 
 class Collections extends Component {
 
@@ -12,8 +16,7 @@ class Collections extends Component {
 
         this.state = {
             url: props.url,     // url of API
-            collections: [],    // array with collections objects
-            expanded: false       // component expanded
+            collections: []    // array with collections objects
         }
     }
 
@@ -43,69 +46,53 @@ class Collections extends Component {
         })
     }
 
-    // Invert expanded state
-    expand = (e) => {
-        this.setState({
-            expanded: !this.state.expanded
-        })
-    }
-
     render() {
-        const{collections, expanded, url} = this.state
+        const{collections, url} = this.state
         return(
             <div>
-                { 
-                    // Collections are loaded but not shown
-                    !expanded && 
-                    <button type="button" onClick={this.expand}>Show {collections.length} features</button> 
-                }
-                { 
-                    // Collections are shown
-                    expanded && 
-                    <div>
-                        <ul>
-                            <h3>Features collections</h3>
+                <ul>
+                    <h3>Features collections</h3>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                            <th style={{width: "30%"}}>Title</th>
+                            <th style={{width: "60%"}}>Description</th>
+                            <th style={{width: "10%"}}>#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             {collections.filter(collection => collection.itemType === 'feature').map(collection => 
-                            <Table striped bordered hover key={collection.id}>
-                                <thead>
-                                    <tr>
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                    <th>#</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                    <td>{collection.title}</td>
-                                    <td>{collection.description}</td>
-                                    <td><FeatureItems id={collection.id} url={url}></FeatureItems></td>
-                                    </tr>
-                                </tbody>
-                            </Table>)}
-                        </ul>
-                        <ul>
-                            <h3>Records collections</h3>
+                            <tr key={collection.id}>
+                                <td>{collection.title}</td>
+                                <td>{collection.description}</td>
+                                <td><Link to={generatePath("/collection/:collectionId", {collectionId: collection.id})} >Show</Link></td>
+                            </tr>
+                            )}
+                        </tbody>
+                    </Table>
+                </ul>
+                <ul>
+                    <h3>Records collections</h3>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                            <th style={{width: "30%"}}>Title</th>
+                            <th style={{width: "60%"}}>Description</th>
+                            <th style={{width: "10%"}}>#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             {collections.filter(collection => collection.itemType === 'record').map(collection => 
-                            <Table striped bordered hover key={collection.id}>
-                                <thead>
-                                    <tr>
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                    <th>#</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                    <td>{collection.title}</td>
-                                    <td>{collection.description}</td>
-                                    <td><RecordItems id={collection.id} url={url}></RecordItems></td>
-                                    </tr>
-                                </tbody>
-                            </Table>)}
-                        </ul>
-                        <button type="button" onClick={this.expand}>Hide</button>
-                    </div>
-                }
+                            <tr key={collection.id}>
+                                <td>{collection.title}</td>
+                                <td>{collection.description}</td>
+                                <td><RecordItems id={collection.id} url={url}></RecordItems></td>
+                            </tr>
+                            )}
+                        </tbody>
+                    </Table>
+                </ul>
+                {collections.length} collections shown.
             </div>
             )
     }
