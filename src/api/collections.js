@@ -1,9 +1,8 @@
 import React, {Component} from "react";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
-import RecordItems from "./RecordItems";
+import withRouter from "./Utils";
 import {
-    BrowserRouter as Router,
     generatePath,
     Link
   } from "react-router-dom";
@@ -15,8 +14,8 @@ class Collections extends Component {
         super(props)
 
         this.state = {
-            url: props.url,     // url of API
-            collections: []    // array with collections objects
+            url: this.props.params.url,
+            collections: []
         }
     }
 
@@ -65,7 +64,7 @@ class Collections extends Component {
                             <tr key={collection.id}>
                                 <td>{collection.title}</td>
                                 <td>{collection.description}</td>
-                                <td><Link to={generatePath("/collection/:collectionId", {collectionId: collection.id})} >Show</Link></td>
+                                <td><Link className="btn btn-dark btn-sm" to={generatePath("/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collection.id})} >Show</Link></td>
                             </tr>
                             )}
                         </tbody>
@@ -86,7 +85,7 @@ class Collections extends Component {
                             <tr key={collection.id}>
                                 <td>{collection.title}</td>
                                 <td>{collection.description}</td>
-                                <td><RecordItems id={collection.id} url={url}></RecordItems></td>
+                                <td><Link className="btn btn-dark btn-sm" to={generatePath("/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collection.id})} >Show</Link></td>
                             </tr>
                             )}
                         </tbody>
@@ -98,4 +97,4 @@ class Collections extends Component {
     }
 }
 
-export default Collections
+export default withRouter(Collections)

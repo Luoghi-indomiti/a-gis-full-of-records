@@ -2,11 +2,13 @@ import React, {Component} from "react";
 import axios from "axios";
 import Collections from "./collections";
 import FeatureItems from "./FeatureItems";
+import JsonViewer from "./JsonViewer";
+import GeometryViewer from "./GeometryViewer";
 import {
-    BrowserRouter as Router,
     Routes,
     Route,
-    Link
+    Link,
+    generatePath,
   } from "react-router-dom";
 
 
@@ -74,10 +76,6 @@ class ApiLoader extends Component {
         }
     }
 
-    CollectionRoute = (e) => (
-        <h3>Going here nowhere</h3>
-    );
-
     render() {
         const{url,conforms} = this.state
 
@@ -86,21 +84,24 @@ class ApiLoader extends Component {
                 <label>API url </label>
                 <input type='text' name='url' value={url} onChange={this.checkUrl}></input>
                 {
-                    conforms > 0 && 
-                    <div>
-                        <br/>
-                        <Routes>
-                            <Route exact path="/" element={<Collections url={url} />} />
-                            <Route exact path="collection/:collectionId" element={<FeatureItems url={url} />} />
-                        </Routes>
-                    </div>
-                }
-                {
                     conforms < 0 && 
                     <div>
                         {conforms === -1 && <div className="alert alert-danger">It doesn't seem an OGC Open API</div>}
                         {conforms === -2 && <div className="alert alert-warning">Missing required conformance</div>}
                         {conforms === -3 && <div className="alert alert-warning">Not a valid URL</div>}
+                    </div>
+                }
+                <Link className="btn btn-dark btn-sm" to={generatePath("/:url", {url: encodeURIComponent(url)})} >Load collections</Link>
+                {
+                    <div>
+                        <br/>
+                        <Routes>
+                            <Route exact path="/" element={<div />} />
+                            <Route exact path="/:url" element={<Collections />} />
+                            <Route exact path="/:url/collection/:collectionId" element={<FeatureItems />} />
+                            <Route exact path="/:url/collection/:collectionId/:itemId/json" element={<JsonViewer />} />
+                            <Route exact path="/:url/collection/:collectionId/:itemId/map" element={<GeometryViewer />} />
+                        </Routes>
                     </div>
                 }
             </div>
