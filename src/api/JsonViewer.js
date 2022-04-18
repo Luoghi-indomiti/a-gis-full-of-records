@@ -36,9 +36,9 @@ class JsonViewer extends Component {
 
         return(
             <>
-                <Link className="btn btn-dark btn-sm" to={generatePath("/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collectionId})} >Back to items</Link>
+                <Link className="btn btn-dark btn-sm" to={generatePath("/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collectionId})} ><i className="bi bi-arrow-left-circle" style={{ fontSize: 15 }}></i> Back to items</Link>
                 <ReactJson src={feature} readOnly />
-                <Link className="btn btn-dark btn-sm" to={generatePath("/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collectionId})} >Back to items</Link>
+                <Link className="btn btn-dark btn-sm" to={generatePath("/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collectionId})} ><i className="bi bi-arrow-left-circle" style={{ fontSize: 15 }}></i> Back to items</Link>
             </>
             )
     }

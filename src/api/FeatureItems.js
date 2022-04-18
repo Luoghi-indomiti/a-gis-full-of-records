@@ -45,7 +45,7 @@ class FeatureItems extends Component {
 
         return(
             <span className="ps-2">
-                <h2>{collectionId}</h2>
+                <h2><i className="bi bi-info-square" style={{ fontSize: 30 }}></i> {collectionId}</h2>
                 
                 <Table striped bordered hover>
                     <thead>
@@ -59,12 +59,12 @@ class FeatureItems extends Component {
                         {items.map(feature => 
                             <tr key={feature.id}>
                                 <td>{this.goodTheFirstOne(feature)}</td>
-                                <td><Link className="btn btn-dark btn-sm" to={generatePath("/:url/collection/:collectionId/:itemId/json", {url: encodeURIComponent(url),collectionId: collectionId, itemId: feature.id})} >Show</Link></td>
-                                <td><Link className="btn btn-dark btn-sm" to={generatePath("/:url/collection/:collectionId/:itemId/map", {url: encodeURIComponent(url),collectionId: collectionId, itemId: feature.id})} >Show</Link></td>
+                                <td><Link className="btn btn-info btn-sm" to={generatePath("/:url/collection/:collectionId/:itemId/json", {url: encodeURIComponent(url),collectionId: collectionId, itemId: feature.id})} > <i className="bi bi-filetype-json" style={{ fontSize: 20 }}></i></Link></td>
+                                <td><Link className="btn btn-info btn-sm" to={generatePath("/:url/collection/:collectionId/:itemId/map", {url: encodeURIComponent(url),collectionId: collectionId, itemId: feature.id})} > <i className="bi bi-map" style={{ fontSize: 20 }}></i></Link></td>
                         </tr>)}
                     </tbody>
                 </Table>
-                <Link className="btn btn-dark btn-sm" to={generatePath("/:url", {url: encodeURIComponent(this.state.url)})} >Back to collections</Link>
+                <Link className="btn btn-dark btn-sm" to={generatePath("/:url", {url: encodeURIComponent(this.state.url)})} ><i className="bi bi-arrow-left-circle" style={{ fontSize: 15 }}></i> Back to collections</Link>
             </span>
         )
     }

@@ -48,7 +48,7 @@ class GeometryViewer extends Component {
         return(
             <ErrorBoundary>
 
-                <Link className="btn btn-dark btn-sm" to={generatePath("/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collectionId})} >Back to items</Link>
+                <Link className="btn btn-dark btn-sm" to={generatePath("/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collectionId})} ><i className="bi bi-arrow-left-circle" style={{ fontSize: 15 }}></i> Back to items</Link>
                 {bounds && (
                 <MapContainer className="leaflet-container" bounds={bounds} zoom={7}>
                 <TileLayer
@@ -61,7 +61,7 @@ class GeometryViewer extends Component {
                 />
                 </MapContainer>
                 )}
-                <Link className="btn btn-dark btn-sm" to={generatePath("/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collectionId})} >Back to items</Link>
+                <Link className="btn btn-dark btn-sm" to={generatePath("/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collectionId})} ><i className="bi bi-arrow-left-circle" style={{ fontSize: 15 }}></i> Back to items</Link>
             </ErrorBoundary>
             )
     }

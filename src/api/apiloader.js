@@ -81,8 +81,9 @@ class ApiLoader extends Component {
 
         return(
             <div className="row">
-                <label>API url </label>
+                <label>Put your OGC API URL here: </label>
                 <input type='text' name='url' value={url} onChange={this.checkUrl}></input>
+                <br/>
                 {
                     conforms < 0 && 
                     <div>

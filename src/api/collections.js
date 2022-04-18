@@ -50,13 +50,13 @@ class Collections extends Component {
         return(
             <div>
                 <ul>
-                    <h3>Features collections</h3>
+                    <h3><i className="bi bi-geo-alt" style={{ fontSize: 30 }}></i> Features collections</h3>
                     <Table striped bordered hover>
                         <thead>
                             <tr>
                             <th style={{width: "30%"}}>Title</th>
                             <th style={{width: "60%"}}>Description</th>
-                            <th style={{width: "10%"}}>#</th>
+                            <th style={{width: "10%"}}>Show</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -64,20 +64,20 @@ class Collections extends Component {
                             <tr key={collection.id}>
                                 <td>{collection.title}</td>
                                 <td>{collection.description}</td>
-                                <td><Link className="btn btn-dark btn-sm" to={generatePath("/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collection.id})} >Show</Link></td>
+                                <td><Link className="btn btn-info btn-sm" to={generatePath("/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collection.id})} ><i className="bi bi-card-list" style={{ fontSize: 20 }}></i></Link></td>
                             </tr>
                             )}
                         </tbody>
                     </Table>
                 </ul>
                 <ul>
-                    <h3>Records collections</h3>
+                    <h3><i className="bi bi-archive" style={{ fontSize: 30 }}></i> Records collections</h3>
                     <Table striped bordered hover>
                         <thead>
                             <tr>
                             <th style={{width: "30%"}}>Title</th>
                             <th style={{width: "60%"}}>Description</th>
-                            <th style={{width: "10%"}}>#</th>
+                            <th style={{width: "10%"}}>Show</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -85,7 +85,7 @@ class Collections extends Component {
                             <tr key={collection.id}>
                                 <td>{collection.title}</td>
                                 <td>{collection.description}</td>
-                                <td><Link className="btn btn-dark btn-sm" to={generatePath("/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collection.id})} >Show</Link></td>
+                                <td><Link className="btn btn-info btn-sm" to={generatePath("/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collection.id})} ><i className="bi bi-card-list" style={{ fontSize: 20 }}></i></Link></td>
                             </tr>
                             )}
                         </tbody>
