@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
+import baseUrl from "./baseUrl"
 import withRouter from "./Utils";
 import {
     generatePath,
@@ -64,7 +65,7 @@ class Collections extends Component {
                             <tr key={collection.id}>
                                 <td>{collection.title}</td>
                                 <td>{collection.description}</td>
-                                <td><Link className="btn btn-dark btn-sm" to={generatePath("/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collection.id})} >Show</Link></td>
+                                <td><Link className="btn btn-dark btn-sm" to={generatePath(baseUrl + "/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collection.id})} >Show</Link></td>
                             </tr>
                             )}
                         </tbody>
@@ -85,7 +86,7 @@ class Collections extends Component {
                             <tr key={collection.id}>
                                 <td>{collection.title}</td>
                                 <td>{collection.description}</td>
-                                <td><Link className="btn btn-dark btn-sm" to={generatePath("/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collection.id})} >Show</Link></td>
+                                <td><Link className="btn btn-dark btn-sm" to={generatePath(baseUrl +  "/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collection.id})} >Show</Link></td>
                             </tr>
                             )}
                         </tbody>

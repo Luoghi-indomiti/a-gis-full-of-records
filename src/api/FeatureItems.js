@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
 import withRouter from "./Utils";
+import baseUrl from "./baseUrl"
 import {
     generatePath,
     Link
@@ -59,8 +60,8 @@ class FeatureItems extends Component {
                         {items.map(feature => 
                             <tr key={feature.id}>
                                 <td>{this.goodTheFirstOne(feature)}</td>
-                                <td><Link className="btn btn-dark btn-sm" to={generatePath("/:url/collection/:collectionId/:itemId/json", {url: encodeURIComponent(url),collectionId: collectionId, itemId: feature.id})} >Show</Link></td>
-                                <td><Link className="btn btn-dark btn-sm" to={generatePath("/:url/collection/:collectionId/:itemId/map", {url: encodeURIComponent(url),collectionId: collectionId, itemId: feature.id})} >Show</Link></td>
+                                <td><Link className="btn btn-dark btn-sm" to={generatePath(baseUrl + "/:url/collection/:collectionId/:itemId/json", {url: encodeURIComponent(url),collectionId: collectionId, itemId: feature.id})} >Show</Link></td>
+                                <td><Link className="btn btn-dark btn-sm" to={generatePath(baseUrl + "/:url/collection/:collectionId/:itemId/map", {url: encodeURIComponent(url),collectionId: collectionId, itemId: feature.id})} >Show</Link></td>
                         </tr>)}
                     </tbody>
                 </Table>

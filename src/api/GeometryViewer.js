@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import axios from "axios";
 import withRouter from "./Utils";
 import ErrorBoundary from "./ErrorBoundary";
+import baseUrl from "./baseUrl"
+
 import {
     generatePath,
     Link
@@ -37,7 +39,7 @@ class GeometryViewer extends Component {
         return(
             <ErrorBoundary>
 
-                <Link className="btn btn-dark btn-sm" to={generatePath("/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collectionId})} >Back to items</Link>
+                <Link className="btn btn-dark btn-sm" to={generatePath(baseUrl + "/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collectionId})} >Back to items</Link>
             </ErrorBoundary>
             )
     }
