@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter basename='/a-gis-full-of-records'>
     <App />
   </BrowserRouter>,
   document.getElementById('root')

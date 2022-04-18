@@ -3,7 +3,6 @@ import axios from "axios";
 import Collections from "./collections";
 import FeatureItems from "./FeatureItems";
 import JsonViewer from "./JsonViewer";
-import baseUrl from "./baseUrl"
 import GeometryViewer from "./GeometryViewer";
 import {
     Routes,

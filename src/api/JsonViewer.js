@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import axios from "axios";
 import withRouter from "./Utils";
 import ReactJson from 'react-json-view';
-import baseUrl from "./baseUrl"
 import {
     generatePath,
     Link
@@ -37,9 +36,9 @@ class JsonViewer extends Component {
 
         return(
             <>
-                <Link className="btn btn-dark btn-sm" to={generatePath(baseUrl + "/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collectionId})} >Back to items</Link>
+                <Link className="btn btn-dark btn-sm" to={generatePath("/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collectionId})} >Back to items</Link>
                 <ReactJson src={feature} readOnly />
-                <Link className="btn btn-dark btn-sm" to={generatePath(baseUrl + "/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collectionId})} >Back to items</Link>
+                <Link className="btn btn-dark btn-sm" to={generatePath("/:url/collection/:collectionId", {url: encodeURIComponent(url),collectionId: collectionId})} >Back to items</Link>
             </>
             )
     }
