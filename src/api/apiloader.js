@@ -45,11 +45,11 @@ class ApiLoader extends Component {
                 .then(response => {
                     if(response.data && response.data.conformsTo) {
                         // Checks conformance
-                        if(response.data.conformsTo.includes(features_core) 
-                            && response.data.conformsTo.includes(features_geojson)
-                            && response.data.conformsTo.includes(records_geojson)
+                        if((response.data.conformsTo.includes(features_core) 
+                            && response.data.conformsTo.includes(features_geojson))
+                            || (response.data.conformsTo.includes(records_geojson)
                             && response.data.conformsTo.includes(records_json)
-                            && response.data.conformsTo.includes(records_html)) {
+                            && response.data.conformsTo.includes(records_html))) {
                             // Valid OGC API
                             this.setState({
                                 conforms: 1
