@@ -19,7 +19,19 @@ class ApiLoader extends Component {
 
         this.state = {
             url: '',
-            conforms: 0
+            conforms: 0,
+            features_core: 0,
+            features_geojson: 0,
+            records_geojson: 0,
+            records_json: 0,
+            records_html: 0,
+            tiles_core: 0,
+            tiles_tileset: 0,
+            tiles_tileset_list: 0,
+            tiles_dataset_tilesets: 0,
+            tiles_geodata_tilesets: 0,
+            tiles_png: 0,
+            tiles_mvt: 0
         }
     }
 
@@ -31,11 +43,18 @@ class ApiLoader extends Component {
         })
 
         // Conformances to verify
-        const features_core = 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core'
-        const features_geojson = 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson'
-        const records_geojson = 'http://www.opengis.net/spec/ogcapi-records-1/1.0/conf/core'
-        const records_json = 'http://www.opengis.net/spec/ogcapi-records-1/1.0/conf/json'
-        const records_html = 'http://www.opengis.net/spec/ogcapi-records-1/1.0/conf/html'
+        const features_core_url = 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/core'
+        const features_geojson_url = 'http://www.opengis.net/spec/ogcapi-features-1/1.0/conf/geojson'
+        const records_geojson_url = 'http://www.opengis.net/spec/ogcapi-records-1/1.0/conf/core'
+        const records_json_url = 'http://www.opengis.net/spec/ogcapi-records-1/1.0/conf/json'
+        const records_html_url = 'http://www.opengis.net/spec/ogcapi-records-1/1.0/conf/html'
+        const tiles_core_url = 'http://www.opengis.net/spec/ogcapi-tiles-1/1.0/core'
+        const tiles_tileset_url = 'http://www.opengis.net/spec/ogcapi-tiles-1/1.0/req/tileset'
+        const tiles_tileset_list_url = 'http://www.opengis.net/spec/ogcapi-tiles-1/1.0/req/tilesets-list'
+        const tiles_dataset_tilesets_url = 'http://www.opengis.net/spec/ogcapi-tiles-1/1.0/req/dataset-tilesets'
+        const tiles_geodata_tilesets_url = 'http://www.opengis.net/spec/ogcapi-tiles-1/1.0/req/geodata-tilesets'
+        const tiles_png_url = 'http://www.opengis.net/spec/ogcapi-tiles-1/1.0/req/png'
+        const tiles_mvt_url = 'http://www.opengis.net/spec/ogcapi-tiles-1/1.0/req/mvt'
 
         // Checks after the URL has a minimal length
         if(e.target.value.length > 9) {
@@ -45,11 +64,24 @@ class ApiLoader extends Component {
                 .then(response => {
                     if(response.data && response.data.conformsTo) {
                         // Checks conformance
-                        if((response.data.conformsTo.includes(features_core) 
-                            && response.data.conformsTo.includes(features_geojson))
-                            || (response.data.conformsTo.includes(records_geojson)
-                            && response.data.conformsTo.includes(records_json)
-                            && response.data.conformsTo.includes(records_html))) {
+                        if(response.data.conformsTo.includes(features_core_url)) { this.setState({features_core : 1}) }
+                        if(response.data.conformsTo.includes(features_geojson_url)) { this.setState({features_geojson : 1}) }
+                        if(response.data.conformsTo.includes(records_geojson_url)) { this.setState({records_geojson : 1}) }
+                        if(response.data.conformsTo.includes(records_json_url)) { this.setState({records_json : 1}) }
+                        if(response.data.conformsTo.includes(records_html_url)) { this.setState({records_html : 1}) }
+                        if(response.data.conformsTo.includes(tiles_core_url)) { this.setState({tiles_core : 1}) }
+                        if(response.data.conformsTo.includes(tiles_tileset_url)) { this.setState({tiles_tileset : 1}) }
+                        if(response.data.conformsTo.includes(tiles_tileset_list_url)) { this.setState({tiles_tileset_list : 1}) }
+                        if(response.data.conformsTo.includes(tiles_dataset_tilesets_url)) { this.setState({tiles_dataset_tilesets : 1}) }
+                        if(response.data.conformsTo.includes(tiles_geodata_tilesets_url)) { this.setState({tiles_geodata_tilesets : 1}) }
+                        if(response.data.conformsTo.includes(tiles_png_url)) { this.setState({tiles_png : 1}) }
+                        if(response.data.conformsTo.includes(tiles_mvt_url)) { this.setState({tiles_mvt : 1}) }
+
+                        const{features_core,features_geojson,records_geojson,records_json,records_html,tiles_core,tiles_tileset,tiles_geodata_tilesets} = this.state
+
+                        if((features_core && features_geojson)
+                            || (records_geojson && records_json && records_html)
+                            || (tiles_core && tiles_tileset && tiles_geodata_tilesets)) {
                             // Valid OGC API
                             this.setState({
                                 conforms: 1
