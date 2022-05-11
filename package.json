@@ -11,6 +11,7 @@
     "bootstrap-icons": "^1.8.1",
     "geojson-bbox": "^0.0.0",
     "leaflet": "^1.7.1",
+    "ol": "^6.14.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.2.3",
     "react-dom": "^17.0.2",

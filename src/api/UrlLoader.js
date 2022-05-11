@@ -1,25 +1,16 @@
 import React, {Component} from "react";
 import axios from "axios";
-import Collections from "./collections";
-import FeatureItems from "./FeatureItems";
-import JsonViewer from "./JsonViewer";
-import GeometryViewer from "./GeometryViewer";
 import {
-    Routes,
-    Route,
     Link,
     generatePath,
   } from "react-router-dom";
 
-
-class ApiLoader extends Component {
-
+class UrlLoader extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
             url: '',
-            conforms: 0,
             features_core: 0,
             features_geojson: 0,
             records_geojson: 0,
@@ -77,11 +68,11 @@ class ApiLoader extends Component {
                         if(response.data.conformsTo.includes(tiles_png_url)) { this.setState({tiles_png : 1}) }
                         if(response.data.conformsTo.includes(tiles_mvt_url)) { this.setState({tiles_mvt : 1}) }
 
-                        const{features_core,features_geojson,records_geojson,records_json,records_html,tiles_core,tiles_tileset,tiles_geodata_tilesets} = this.state
+                        const{features_core,features_geojson,records_geojson,records_json,records_html,tiles_core,tiles_geodata_tilesets} = this.state
 
                         if((features_core && features_geojson)
                             || (records_geojson && records_json && records_html)
-                            || (tiles_core && tiles_tileset && tiles_geodata_tilesets)) {
+                            || (tiles_core && tiles_geodata_tilesets)) {
                             // Valid OGC API
                             this.setState({
                                 conforms: 1
@@ -110,7 +101,6 @@ class ApiLoader extends Component {
 
     render() {
         const{url,conforms} = this.state
-
         return(
             <div className="row">
                 <label>Put your OGC API URL here: </label>
@@ -124,22 +114,10 @@ class ApiLoader extends Component {
                         {conforms === -3 && <div className="alert alert-warning">Not a valid URL</div>}
                     </div>
                 }
-                <Link className="btn btn-dark btn-sm" to={generatePath("/:url", {url: encodeURIComponent(url)})} >Load collections</Link>
-                {
-                    <div>
-                        <br/>
-                        <Routes>
-                            <Route exact path="/" element={<div />} />
-                            <Route exact path="/:url" element={<Collections />} />
-                            <Route exact path="/:url/collection/:collectionId" element={<FeatureItems />} />
-                            <Route exact path="/:url/collection/:collectionId/:itemId/json" element={<JsonViewer />} />
-                            <Route exact path="/:url/collection/:collectionId/:itemId/map" element={<GeometryViewer />} />
-                        </Routes>
-                    </div>
-                }
+                <Link className="btn btn-dark btn-sm" to={generatePath("/:url/", {url: encodeURIComponent(url)})} >Load collections</Link>
             </div>
             )
     }
 }
 
-export default ApiLoader
+export default UrlLoader

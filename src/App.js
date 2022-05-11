@@ -1,12 +1,16 @@
 import './App.css';
-import ApiLoader from './api/apiloader';
+import PathSwitcher from './api/PathSwitcher';
+import {
+  Link,
+  generatePath,
+} from "react-router-dom";
 
 function App() {
   return (
     <div className="App, container">
-      <h1><i className="bi bi-bookmark-heart" style={{ fontSize: 50 }}></i> Check this OGC API</h1>
+      <Link className="btn" to={generatePath("/")} ><h1><i className="bi bi-bookmark-heart" style={{ fontSize: 50 }}></i> Check this OGC API</h1></Link>
       <br/>
-      <ApiLoader></ApiLoader>
+      <PathSwitcher></PathSwitcher>
     </div>
   );
 }
