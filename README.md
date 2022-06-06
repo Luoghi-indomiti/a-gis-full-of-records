@@ -38,4 +38,4 @@ This project is released under an [MIT License](./LICENSE)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Made with ⚛️ by (ByteRoad)[https://byteroad.net/]
+Made with ⚛️ by [ByteRoad](https://byteroad.net/)
